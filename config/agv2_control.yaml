@@ -5,7 +5,11 @@ agv2:
     publish_rate: 50  
 
   # Position Controllers ---------------------------------------
-  rod_joint_position_controller:
+  rod_front_joint_position_controller:
     type: effort_controllers/JointPositionController
-    joint: rod_joint
+    joint: rod_front_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rod_rare_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rod_rare_joint
     pid: {p: 100.0, i: 0.01, d: 10.0}
