@@ -12,5 +12,6 @@
     respawn="false" output="screen">
     <remap from="/joint_states" to="/agv2/joint_states" />
   </node>
+  <node pkg="agv2_control" name="agv2_control_lifter" type="tapping_lifter_subscriber.py" output="screen"/>
 
 </launch>
