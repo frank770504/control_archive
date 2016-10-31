@@ -1,5 +1,5 @@
 <launch>
-
+  <arg name="base_link_frame" default="agv2/base_link"/>
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find agv2_control)/config/agv2_control.yaml" command="load"/>
 
@@ -10,8 +10,10 @@
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
+    <param name="tf_prefix" value="agv2_ctl" />
     <remap from="/joint_states" to="/agv2/joint_states" />
   </node>
+  <node pkg="tf" type="static_transform_publisher" name="tf_js_broadcaster" args="0 0 0 0 0 0 $(arg base_link_frame) agv2_ctl/base_footprint 50"/>
   <node pkg="agv2_control" name="agv2_control_lifter" type="tapping_lifter_subscriber.py" output="screen"/>
 
 </launch>
